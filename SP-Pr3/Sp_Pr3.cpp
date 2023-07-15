@@ -2,14 +2,12 @@
 #include <windowsx.h>
 #include <tchar.h>
 
-LPCTSTR lpszClass = TEXT("SpPr12_Class");
-LPCTSTR lpszAppTitle = TEXT("Главное окно приложения. Програмист Грицкевич");
-LPCTSTR lpszDestroyMessage = TEXT("Поступило сообщение WM_DESTROY, из обработчика "
-"которого и выполнен данный вывод.Сообщение "
-	"поступило в связи с разрушением окна приложения");
+LPCTSTR lpszClass = TEXT("SpPr3_Class");
+LPCTSTR lpszAppTitle = TEXT("Главное окно приложения SpPr3. Програмист Грицкевич");
+LPCTSTR lpszDestroyMessage = TEXT("сообщение WM_DESTROY");
 
 //-- Prototypes -------------------
-LRESULT CALLBACK SpPr12_WndProc(HWND, UINT, WPARAM, LPARAM);
+LRESULT CALLBACK SpPr3_WndProc(HWND, UINT, WPARAM, LPARAM);
 
 //-- Global Variables ------------
 HINSTANCE g_hInst;
@@ -26,7 +24,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	memset(&wc, 0, sizeof(WNDCLASSEX));
 	wc.cbSize = sizeof(WNDCLASSEX);
 	wc.lpszClassName = lpszClass;
-	wc.lpfnWndProc = SpPr12_WndProc;
+	wc.lpfnWndProc = SpPr3_WndProc;
 	wc.style = CS_VREDRAW | CS_HREDRAW;
 	wc.hInstance = hInstance;
 	wc.hIcon = LoadIcon(NULL, MAKEINTRESOURCE(IDI_APPLICATION));

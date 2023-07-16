@@ -39,7 +39,6 @@ int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 			TEXT("Ошибка"), MB_OK | MB_ICONERROR);
 		return FALSE;
 	}
-
 	hWnd = CreateWindowEx(NULL, lpszClass, lpszAppTitle,
 		WS_OVERLAPPEDWINDOW, 200, 100, 800, 600,
 		NULL, NULL, hInstance, NULL);
@@ -58,13 +57,29 @@ int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	}
 	return msg.wParam;
 }
+
+
 // Оконная процедура
-LRESULT CALLBACK SpPr12_WndProc(HWND hWnd, UINT messageID,
+LRESULT CALLBACK SpPr3_WndProc(HWND hWnd, UINT messageID,
 	WPARAM wParam, LPARAM lParam)
 {
 
 	switch (messageID)
 	{
+	case WM_CREATE:
+	{
+		MessageBox(hWnd, TEXT)("Выполняется обработчик WM_CREATE"), TEXT("From WM_CREATE"), MB_OK);
+
+		HWND hBTExit;
+		hBTExit = CreateWindowEx(0, TEXT("BUtton"), WS_CHILD | WS_VISIBLE,
+			50, 50, 100, 30, hWnd, (HMENU)IDCANCEL, g_hInst, NULL);
+		if (!hBTExit)return (-1);
+
+	}return0;
+
+
+
+
 	case WM_PAINT: // Вывод при обновлении окна
 	{	HDC hDC;
 	PAINTSTRUCT ps;

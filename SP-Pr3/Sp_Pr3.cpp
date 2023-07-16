@@ -60,15 +60,14 @@ int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 
 // Оконная процедура
-LRESULT CALLBACK SpPr3_WndProc(HWND hWnd, UINT messageID,
-	WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK SpPr3_WndProc(HWND hWnd, UINT messageID, WPARAM wParam, LPARAM lParam)
 {
 
 	switch (messageID)
 	{
 	case WM_CREATE:
 	{
-		MessageBox(hWnd, TEXT)("Выполняется обработчик WM_CREATE"), TEXT("From WM_CREATE"), MB_OK);
+		MessageBox(hWnd, TEXT("Выполняется обработчик WM_CREATE"), TEXT("From WM_CREATE"), MB_OK);
 
 		HWND hBTExit;
 		hBTExit = CreateWindowEx(0, TEXT("BUtton"), WS_CHILD | WS_VISIBLE,
@@ -77,18 +76,49 @@ LRESULT CALLBACK SpPr3_WndProc(HWND hWnd, UINT messageID,
 
 	}return0;
 
+	case WM_COMMAND:
+	{int id, event;
+	id = LOWORD(wParam);
+	event = HIWORD(wPARAM);
+	switch (id)
+	{
+	case IDCANCEL:
+		{
+		DestroyWindow(hWND);
+		}break;
 
 
+	}
+
+
+	}break;
+
+	case WM_LBUTTONDOWN:
+	{
+		HDC hdc;
+		hdc = GetDC(hWnd);
+		int x; // = 50;
+		int y; // = 100;
+		x = (int)(short)LOWORD(lParam);
+		y = GET_Y_LPARAM(lParam);
+		LPCTSTR lpszLbuttonDownMessage = TEXT("Обработка сообщения WM_LBUTTONDOWN,"
+			" которое посылается в окно при щелчке левой кнопки мыши");
+		TextOut(hdc, x, y lpszLbuttonDownMessage, lstrlen(lpszLbuttonDownMessage));
+		ReleaseDC(hWnd, hdc);
+
+
+	}break;
 
 	case WM_PAINT: // Вывод при обновлении окна
 	{	HDC hDC;
 	PAINTSTRUCT ps;
 	hDC = BeginPaint(hWnd, &ps);	// Получение контекста для
-	// обновления окна
-	LPCTSTR lpszHelloText = TEXT("Hello, World!");
+									// обновления окна
+	LPCTSTR lpszHelloText = TEXT("Hello, World Win32 App!");
 	TextOut(hDC, 10, 10, lpszHelloText, lstrlen(lpszHelloText)); // Вывод в контекст
 	EndPaint(hWnd, &ps); // Завершение обновления окна
 	}	break;
+
 	case WM_DESTROY: // Завершение работы приложения
 	{
 		MessageBox(hWnd, lpszDestroyMessage, TEXT("From WM_DESTROY"), MB_OK);
